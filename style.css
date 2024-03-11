@@ -1,4 +1,52 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: Montserrat;
+}
+
+body {
+  background-color: #F2F2F2;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+}
+
+#logo {
+  height: 3.5em;
+}
+
+#header__text {
+  display: flex;
+  align-items: center;
+}
+
+.login__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.login__container input {
+  color: lightgray;
+  text-align: center;
+  width: 7em;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5em;
+}
+
+
+#login__btn {
+  border: none;
+  background: none;
+  font-size: 28px;
+}
+
+#login__btn:hover {
+  cursor: pointer;
 }
