@@ -31,7 +31,7 @@ body {
 }
 
 .login__container input {
-  color: lightgray;
+  color: gray;
   text-align: center;
   width: 7em;
   font-size: 16px;
@@ -52,10 +52,13 @@ body {
 }
 
 .balance__container {
+  opacity: 0%;
   width: 60%;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  padding: 0em 2em;
+  transition: opacity 1s ease-in-out;
 }
 
 .balance__header {
@@ -73,7 +76,6 @@ body {
 .transfer__container {
   display: flex;
   justify-content: space-between;
-  padding: 1.0em;
   margin-top: 1em;
 }
 
@@ -214,7 +216,7 @@ form h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5em 2em;
+  padding-top: 0.5em;
   width: 100%;
 }
 
@@ -246,5 +248,4 @@ form h2 {
 #timer {
   font-weight: bold;
 }
-
 
