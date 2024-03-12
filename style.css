@@ -50,3 +50,201 @@ body {
 #login__btn:hover {
   cursor: pointer;
 }
+
+.balance__container {
+  width: 60%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.balance__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance__header-left p {
+  color: gray;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+}
+
+.transfer__container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.0em;
+  margin-top: 1em;
+}
+
+.transfer__container-transfers {
+  width: 100%;
+  flex-grow: 2;
+}
+
+.transfer-single {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 1.5em;
+  border-bottom: 1px solid lightgray;
+}
+
+.transfer-single:nth-of-type(1) {
+  border-top-left-radius: 20px;
+}
+
+.transfer__info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: gray;
+}
+
+.deposit {
+  background: linear-gradient(lightgreen, limegreen);
+  padding: 0.2em 1em;
+  border-radius: 20px;
+  color: white;
+}
+
+.withdrawal {
+  background: linear-gradient(lightcoral, crimson);
+  padding: 0.2em 1em;
+  border-radius: 20px;
+  color: white;
+}
+
+.transfer__container-forms {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 2em;
+  flex: 1;
+}
+
+.input__fields {
+  display: flex;
+  flex-direction: column;
+}
+
+.input__fields label {
+  text-align: center;
+  margin-top: 0.5em;
+  font-size: 0.9em;
+}
+
+.input__fields input {
+  background-color: rgba(255, 255, 255, 0.6);
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  padding: 0.5em 1em;
+  width: 10em;
+}
+
+.transfer__container-forms button {
+  align-self: start;
+  background-color: white;
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  border: none;
+}
+
+.transfer__container-forms button:hover {
+  cursor: pointer;
+}
+
+.transfer__container-forms form {
+  margin-bottom: 2em;
+}
+
+.transfer__form {
+  background: linear-gradient(140deg, palegoldenrod, darkorange);
+  padding: 1em;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.transfer__form-input {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 16px;
+}
+
+.loan__form {
+  background: linear-gradient(140deg, lightgreen, limegreen);
+  padding: 1em;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.loan__form-input {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 16px;
+}
+
+.close__account-form {
+  background: linear-gradient(140deg, lightcoral, crimson);
+  padding: 1em;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.close__form-input {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 16px;
+}
+
+form h2 {
+  margin-bottom: 0.7em;
+  font-size: 1.2em;
+}
+
+.transfer__container-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 2em;
+  width: 100%;
+}
+
+.transfer__footer-info {
+  display: flex;
+  flex: 2;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.8em;
+}
+
+#in-amount, #interest-amount {
+  color: limegreen;
+  font-size: 2em;
+}
+
+#out-amount {
+  color: crimson;
+  font-size: 2em;
+}
+
+.transfer__footer-sort {
+  background: none;
+  border: none;
+  font-size: 1em;
+  flex: 1;
+}
+
+#timer {
+  font-weight: bold;
+}
+
+

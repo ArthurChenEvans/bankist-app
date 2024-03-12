@@ -21,70 +21,93 @@
       <input type="text" id="pin__input" placeholder="PIN">
       <button id="login__btn">→</button>
     </form>
-
-    <main class="balance__container">
-        <div class="balance__header">
-            <div class="balance__header-left">
-                <h2>Current balance</h2>
-                <p>As of <span id="balance__date">DD/MM/YYYY</span>, <span id="balance__time">HH:MM</span></p>
-            </div>
-            <div class="balance__header-right">
-                <h1>Balance</h1>
-            </div>
-        </div>
-        <div class="transfer__container">
-            <div class="transfer__container-transfers">
-
-            </div>
-            <div class="transfer__container-forms">
-                <form action="" class="transfer__form">
-                    <h2>Transfer money</h2>
-                    <div class="transfer__form-input">
-                        <input type="text" id="transfer-to" name="transfer-to">
-                        <label for="transfer-to">Transfer to</label>
-                        <input type="text" id="transfer-amount" name="transfer-amount">
-                        <label for="transfer-amount">Amount</label>
-                        <button id="transfer__confirm-btn"></button>
-                    </div>
-                </form>
-                <form action="" class="loan__form">
-                    <h2>Request loan</h2>
-                    <div class="loan__form-input">
-                        <input type="text" id="loan-amount" name="loan-amount">
-                        <label for="loan-amount">Amount</label>
-                        <button id="loan__confirm-btn"></button>
-                    </div>
-                </form>
-                <form action="" class="close__account-form">
-                    <h2>Close account</h2>
-                    <div class="close__form-input">
-                        <input type="text" id="confirm-user" name="confirm-user">
-                        <label for="confirm-user"></label>
-                        <input type="text" id="confirm-pin" name="confirm-pin">
-                        <label for="confirm-pin"></label>
-                        <button id="close__confirm-btn"></button>
-                    </div>
-                </form>
-            </div>
-            <div class="transfer__container-footer">
-                <div class="transfer__footer-info">
-                    <div class="transfer__footer-in">
-                        IN <span id="in-amount"></span>
-                    </div>
-                    <div class="transfer__footer-out">
-                        OUT <span id="out-amount"></span>
-                    </div>
-                    <div class="transfer__footer-interest">
-                        INTEREST <span id="interest-amount"></span>
-                    </div>
-                    <button class="transfer__footer-sort">↓ SORT</button>
-                </div>
-                <div class="logout__timer">
-                    You will be logged out in <span id="timer">MM:SS</span>
-                </div>
-            </div>
-        </div>
-    </main>
   </nav>
+
+  <main class="balance__container">
+      <div class="balance__header">
+          <div class="balance__header-left">
+              <h2>Current balance</h2>
+              <p>As of <span id="balance__date">DD/MM/YYYY</span>, <span id="balance__time">HH:MM</span></p>
+          </div>
+          <div class="balance__header-right">
+              <h1>Balance</h1>
+          </div>
+      </div>
+      <div class="transfer__container">
+          <div class="transfer__container-transfers">
+              <div class="transfer-single">
+                  <div class="transfer__info">
+                      <div class="transfer__type withdrawal">2 Withdrawal</div>
+                      <div class="transfer__date">29/05/2022</div>
+                  </div>
+                  <div class="transfer__amount">-500 GBP</div>
+              </div>
+            <div class="transfer-single">
+                <div class="transfer__info">
+                    <div class="transfer__type deposit">1 Deposit</div>
+                    <div class="transfer__date">28/05/2022</div>
+                </div>
+                <div class="transfer__amount">20000 GBP</div>
+            </div>
+          </div>
+          <div class="transfer__container-forms">
+              <form action="" class="transfer__form">
+                  <h2>Transfer money</h2>
+                  <div class="transfer__form-input">
+                      <div class="input__fields">
+                          <input type="text" id="transfer-to" name="transfer-to">
+                          <label for="transfer-to">Transfer to</label>
+                      </div>
+                        <div class="input__fields">
+                            <input type="text" id="transfer-amount" name="transfer-amount">
+                            <label for="transfer-amount">Amount</label>
+                        </div>
+                      <button id="transfer__confirm-btn">→</button>
+                  </div>
+              </form>
+              <form action="" class="loan__form">
+                  <h2>Request loan</h2>
+                  <div class="loan__form-input">
+                      <div class="input__fields">
+                          <input type="text" id="loan-amount" name="loan-amount">
+                          <label for="loan-amount">Amount</label>
+                      </div>
+                      <button id="loan__confirm-btn">→</button>
+                  </div>
+              </form>
+              <form action="" class="close__account-form">
+                  <h2>Close account</h2>
+                  <div class="close__form-input">
+                      <div class="input__fields">
+                          <input type="text" id="confirm-user" name="confirm-user">
+                          <label for="confirm-user">Confirm user</label>
+                      </div>
+                      <div class="input__fields">
+                          <input type="text" id="confirm-pin" name="confirm-pin">
+                          <label for="confirm-pin">Confirm PIN</label>
+                      </div>
+                      <button id="close__confirm-btn">→</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <div class="transfer__container-footer">
+          <div class="transfer__footer-info">
+              <div class="transfer__footer-in">
+                  IN <span id="in-amount">XXX</span>
+              </div>
+              <div class="transfer__footer-out">
+                  OUT <span id="out-amount">XXX</span>
+              </div>
+              <div class="transfer__footer-interest">
+                  INTEREST <span id="interest-amount">XXX</span>
+              </div>
+              <button class="transfer__footer-sort">↓ SORT</button>
+          </div>
+          <div class="logout__timer">
+              You will be logged out in <span id="timer">MM:SS</span>
+          </div>
+      </div>
+  </main>
 </body>
 </html>
