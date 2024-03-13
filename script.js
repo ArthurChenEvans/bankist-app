@@ -18,9 +18,18 @@ const loginBtn = document.getElementById('login__btn');
 const mainContent = document.querySelector('.balance__container');
 const totalIn = document.getElementById('in-amount');
 const totalOut = document.getElementById('out-amount');
-const totalInterest = document.getElementById('interest-amount')
+const totalInterest = document.getElementById('interest-amount');
+const currentDate = document.getElementById('balance__date');
+const currentTime = document.getElementById('balance__time');
+const transferTo = document.getElementById('transfer-to');
+const transferAmount = document.getElementById('transfer-amount');
+const transferBtn = document.getElementById('transfer__confirm-btn');
+const loanAmount = document.getElementById('loan-amount');
+const loanBtn = document.getElementById('login__btn');
+const closeAccBtn = document.getElementById('close__confirm-btn');
 const sortBtn = document.querySelector('.transfer__footer-sort');
 const timerText = document.getElementById('timer');
+const transferContainer = document.querySelector('.transfer__container-transfers');
 
 document.addEventListener('DOMContentLoaded', () => {
     accounts.push(account1);
@@ -35,6 +44,8 @@ loginBtn.addEventListener('click', (event) => {
             document.querySelector('.balance__header-right h1').textContent =
                 new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP'}).format(account.balance);
             document.querySelector('#header__text').innerText = `Good Day, ${account.name}!`;
+            currentDate.innerText = new Intl.DateTimeFormat('en-GB', { style: 'DD/MM/YYYY' }).format(new Date());
+            currentTime.innerText = new Intl.DateTimeFormat('en-GB', { timeStyle: 'long' }).format(new Date().getTime());
             updateTotals(account);
             startTimer();
         } else {
@@ -42,6 +53,18 @@ loginBtn.addEventListener('click', (event) => {
         }
     })
 });
+
+transferBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    const transferPerson = transferTo.value;
+    const amountToTransfer = transferAmount.value;
+
+    let newTransfer = document.createElement('div');
+    newTransfer.classList.add('transfer-single');
+    transferContainer.prepend(newTransfer);
+
+
+})
 
 
 function startTimer() {
