@@ -31,6 +31,8 @@ const transferBtn = document.getElementById('transfer__confirm-btn');
 const loanAmount = document.getElementById('loan-amount');
 const loanBtn = document.getElementById('loan__confirm-btn');
 const closeAccBtn = document.getElementById('close__confirm-btn');
+const closeUserInput = document.getElementById('confirm-user');
+const closePINInput = document.getElementById('confirm-pin');
 const sortBtn = document.querySelector('.transfer__footer-sort');
 const timerText = document.getElementById('timer');
 const transferContainer = document.querySelector('.transfer__container-transfers');
@@ -40,15 +42,19 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 loginBtn.addEventListener('click', (event) => {
-    accounts.forEach(account => {
-        event.preventDefault();
-        if ((account.user == userInput.value) && (account.pass == PINInput.value)) {
-            account.balance = account.calculateBalance();
-            showView(account);
-        } else {
-            alert('Incorrect login.');
-        }
-    })
+    event.preventDefault();
+    console.log(accounts);
+    const evaluateAccount = (account) => (account.user == userInput.value && account.pass == PINInput.value) ? account : null; 
+    let accountIndex = accounts.findIndex(evaluateAccount);
+    let account = accounts[accountIndex];
+    console.log(account);
+
+    if (account != null) {
+        account.balance = account.calculateBalance();
+        showView(account);
+    } else {
+        alert('Incorrect login or account does not exist.');
+    }
 });
 
 
@@ -58,7 +64,7 @@ transferBtn.addEventListener('click', (event) => {
     if (amountToTransfer >= 0) {
         alert('You cannot transfer 0 or negative money.');
     } else {
-        let account = accounts.filter(account => account.isLoggedIn === true).pop();
+        let account = accounts.find(account => account.isLoggedIn === true);
         account.transfers.push(amountToTransfer);
     
         updateTransfersList(amountToTransfer, account);
@@ -74,12 +80,28 @@ loanBtn.addEventListener('click', (event) => {
     if (amountToLoan <= 0) {
         alert('You cannot take out a loan that is less than or equal to 0.');
     } else {
-        let account = accounts.filter(account => account.isLoggedIn === true).pop();
+        let account = accounts.find(account => account.isLoggedIn === true);
         account.transfers.push(amountToLoan);
 
         updateTransfersList(amountToLoan, account);
         updateTotals(account);
         updateBalance(account);
+    }
+});
+
+closeAccBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    let account = accounts.find(account => account.isLoggedIn === true);
+    const user = closeUserInput.value;
+    const pin = closePINInput.value;
+
+    if ((user != account.user) || (pin != account.pass)) {
+        alert('Incorrect user or pin.');
+    } else {
+        account.isLoggedIn = false;
+        accounts.pop(account);
+        mainContent.style.opacity = '0%';
+        alert('You have deleted your account!');
     }
 });
 
