@@ -4,13 +4,17 @@ let account1 = {
     name: 'Arthur',
     user: 'ae',
     pass: '0000',
-    balance: 19500,
     interestRate:    1.2,
     transfers: [20000, -500],
+    balance: 0,
     isLoggedIn: false,
-}
 
-let accounts = []
+    calculateBalance() {
+        return this.transfers.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+    }
+};
+
+let accounts = [];
 
 const userInput = document.getElementById('user__input');
 const PINInput = document.getElementById('pin__input');
@@ -25,7 +29,7 @@ const transferTo = document.getElementById('transfer-to');
 const transferAmount = document.getElementById('transfer-amount');
 const transferBtn = document.getElementById('transfer__confirm-btn');
 const loanAmount = document.getElementById('loan-amount');
-const loanBtn = document.getElementById('login__btn');
+const loanBtn = document.getElementById('loan__confirm-btn');
 const closeAccBtn = document.getElementById('close__confirm-btn');
 const sortBtn = document.querySelector('.transfer__footer-sort');
 const timerText = document.getElementById('timer');
@@ -39,33 +43,91 @@ loginBtn.addEventListener('click', (event) => {
     accounts.forEach(account => {
         event.preventDefault();
         if ((account.user == userInput.value) && (account.pass == PINInput.value)) {
-            account.isLoggedIn = true;
-            mainContent.style.opacity = '100%';
-            document.querySelector('.balance__header-right h1').textContent =
-                new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP'}).format(account.balance);
-            document.querySelector('#header__text').innerText = `Good Day, ${account.name}!`;
-            currentDate.innerText = new Intl.DateTimeFormat('en-GB', { style: 'DD/MM/YYYY' }).format(new Date());
-            currentTime.innerText = new Intl.DateTimeFormat('en-GB', { timeStyle: 'long' }).format(new Date().getTime());
-            updateTotals(account);
-            startTimer();
+            account.balance = account.calculateBalance();
+            showView(account);
         } else {
             alert('Incorrect login.');
         }
     })
 });
 
+
 transferBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    const transferPerson = transferTo.value;
-    const amountToTransfer = transferAmount.value;
+    const amountToTransfer = -Number(transferAmount.value);
+    if (amountToTransfer >= 0) {
+        alert('You cannot transfer 0 or negative money.');
+    } else {
+        let account = accounts.filter(account => account.isLoggedIn === true).pop();
+        account.transfers.push(amountToTransfer);
+    
+        updateTransfersList(amountToTransfer, account);
+        updateTotals(account);
+        updateBalance(account);
+    }
+});
 
+loanBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    const amountToLoan = Number(loanAmount.value);
+
+    if (amountToLoan <= 0) {
+        alert('You cannot take out a loan that is less than or equal to 0.');
+    } else {
+        let account = accounts.filter(account => account.isLoggedIn === true).pop();
+        account.transfers.push(amountToLoan);
+
+        updateTransfersList(amountToLoan, account);
+        updateTotals(account);
+        updateBalance(account);
+    }
+});
+
+
+function showView(account) {
+    account.isLoggedIn = true;
+    mainContent.style.opacity = '100%';
+    document.querySelector('.balance__header-right h1').textContent =
+        new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP'}).format(account.balance);
+    document.querySelector('#header__text').innerText = `Good Day, ${account.name}!`;
+    currentDate.innerText = new Intl.DateTimeFormat('en-GB', { style: 'DD/MM/YYYY' }).format(new Date());
+    currentTime.innerText = new Intl.DateTimeFormat('en-GB', { timeStyle: 'long' }).format(new Date().getTime());
+    updateTotals(account);
+    startTimer();
+}
+
+function updateTransfersList(amount, account) {
     let newTransfer = document.createElement('div');
     newTransfer.classList.add('transfer-single');
     transferContainer.prepend(newTransfer);
 
+    let transferInfo = document.createElement('div');
+    transferInfo.classList.add('transfer__info');
+    newTransfer.append(transferInfo);
 
-})
+    let transferTypeDiv = document.createElement('div')
+    let transferAmount = amount;
+    let transferType = transferTypeChecker(amount);
 
+    if (transferType == 'deposit') {
+        transferTypeDiv.classList.add('deposit');
+    } else if (transferType == 'withdrawal') {
+        transferTypeDiv.classList.add('withdrawal');
+    }
+
+    transferTypeDiv.innerText = `${account.transfers.length} ${transferType}`;
+    transferInfo.append(transferTypeDiv);
+
+    let transferDate = document.createElement('div');
+    transferDate.classList.add('transfer__date');
+    transferDate.innerText = new Intl.DateTimeFormat('en-GB', { style: 'DD/MM/YY' }).format(new Date());
+    transferInfo.append(transferDate);
+
+    let transferAmountFormatted = document.createElement('div');
+    transferAmountFormatted.classList.add('transfer__amount');
+    transferAmountFormatted.innerText = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP'}).format(transferAmount);
+    newTransfer.append(transferAmountFormatted);
+}
 
 function startTimer() {
     let timer = 10 * 60;
@@ -106,4 +168,10 @@ function transferTypeChecker(transfer) {
     } else if (transfer < 0) {
         return 'withdrawal';
     }
+}
+
+function updateBalance(account) {
+    account.balance = account.calculateBalance();
+    document.querySelector('.balance__header-right h1').textContent =
+        new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP'}).format(account.balance);
 }

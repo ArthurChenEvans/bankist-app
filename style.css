@@ -82,6 +82,8 @@ body {
 .transfer__container-transfers {
   width: 100%;
   flex-grow: 2;
+  overflow: scroll;
+  max-height: 600px;
 }
 
 .transfer-single {
